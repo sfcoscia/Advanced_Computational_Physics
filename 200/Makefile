@@ -7,7 +7,7 @@ F90 = gfortran
 
 F90FLAGS = -O3 -funroll-loops # -fexternal-blas # optimization 
 
-LIBS = -framework Accelerate # library 
+#LIBS = -framework Accelerate # library 
 
 LDFLAGS = $(LIBS)
 
