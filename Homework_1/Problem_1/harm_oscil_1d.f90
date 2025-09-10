@@ -10,14 +10,32 @@ program harmonic_oscillator_1d
     nm = 5
     
     do i = 0,100
-        x = -2 + i * 4._dp/100
-        call wavefunction(nm,x, opol)
-        write(7, *) x, opol(0:nm)*sqrt(1/(sqrt(pi)*2**nm*fact(nm)))*exp(-x**2/2)
+        x = -4 + i * 8._dp/100
+        call hermite_poly(nm,x, opol)
+        call wavefunction(nm,x,opol)
+        write(7, *) x, opol(0:nm)
     end do
 
     print *, 'computing 1D Harmonic Oscillator functions'
 
     contains 
+
+
+        subroutine hermite_poly(nm, x, hpoly) !Hermite polynomials H_n(x)
+            use numtype
+            implicit none
+            integer, intent(in) :: nm
+            real(dp), intent(in) :: x
+            real(dp), dimension(0:nm) :: hpoly
+            integer :: n
+
+            hpoly(0) = 1
+            hpoly(1) = 2*x
+            do n = 1, nm-1
+                hpoly(n+1) = 2 * x * hpoly(n) - 2 * n * hpoly(n-1)
+            end do
+
+        end subroutine hermite_poly
 
         subroutine wavefunction(nm, x, wfunc) !Hermite polynomials H_n(x)
             use numtype
@@ -26,13 +44,11 @@ program harmonic_oscillator_1d
             real(dp), intent(in) :: x
             real(dp), dimension(0:nm) :: wfunc
             integer :: n
-            real(dp) :: coeff
-             
-            wfunc(0) = 1*sqrt(1/(2*sqrt(pi)))*exp(-x**2)/2
-            wfunc(1) = 2*x*sqrt(1/(sqrt(pi)*2**2*fact(2)))*exp(-x**2/2)
-            do n = 1, nm-1
-              coeff = sqrt(1/(sqrt(pi)*2**n*fact(n)))*exp(-x**2/2)
-              wfunc(n+1) = coeff*(2 * x * wfunc(n) - 2 * n * wfunc(n-1))
+            real(dp) :: coeff, beta
+            beta = 1
+            do n = 0, nm-1
+              coeff = sqrt(beta/(sqrt(pi)*2**n*fact(n)))*exp(-beta**2*x**2/2)
+              wfunc(n) = coeff*wfunc(n)
             end do
 
         end subroutine wavefunction
