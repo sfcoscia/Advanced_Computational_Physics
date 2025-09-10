@@ -1,4 +1,4 @@
-! continued fraction code for exponential
+! continued fraction code for various functions
 program cfexp
 
   use numtype
@@ -15,7 +15,61 @@ program cfexp
   !logarithms
   print *, x, log(x), logg(x) 
 
+  x = 3.7_dp
+  !logarithms
+  print *, x, log(x), logg(x) 
+
+  x = 2.3_dp
+  print *, x, tan(x), tancf(x)
+
+  x = 2.3_dp
+  print *, x, atan(x), arctancf(x)
+
+  x = pi/4
+  print *, x, atan(x), arctancf(x)
+
+
+
   contains
+
+   ! 1 way to calcualte arctan(x)
+    function arctancf(x) result(s)
+    
+      implicit none
+      real(dp), intent(in) :: x
+      real(dp) :: s
+      integer :: i
+      integer, parameter :: imax = 30
+
+
+      !continued fractions are built in here
+      s = 0
+      do i = imax, 0, -1
+        s = (2*i+1)+((i+1)*x)**2/s
+      end do
+      s = x/s
+
+    end function arctancf
+
+    ! 1 way to calcualte tan(x)
+    function tancf(x) result(s)
+    
+      implicit none
+      real(dp), intent(in) :: x
+      real(dp) :: s
+      integer :: i
+      integer, parameter :: imax = 30
+
+
+      !continued fractions are built in here
+      s = 0
+      do i = imax, 0, -1
+        s = (2*i+1)-x**2/s
+      end do
+      s = x/s
+
+    end function tancf
+
     ! 1 way to calcualte exponential
     function logg(x) result(s)
     
