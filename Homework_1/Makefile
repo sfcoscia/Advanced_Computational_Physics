@@ -1,13 +1,13 @@
 
-OBJS1 = numtype.o horner.o # object files
+OBJS1 = numtype.o ortho.o # object files
 
-PROG1 = horn # code name
+PROG1 = ort # code name
 
 F90 = gfortran
 
 F90FLAGS = -O3 -funroll-loops # -fexternal-blas # optimization 
 
-LIBS = -framework Accelerate # library 
+#LIBS = -framework Accelerate # library 
 
 LDFLAGS = $(LIBS)
 
