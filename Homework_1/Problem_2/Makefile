@@ -1,7 +1,7 @@
 
-OBJS1 = numtype.o ortho.o # object files
+OBJS1 = numtype.o harm_oscil_nd.o # object files
 
-PROG1 = ort # code name
+PROG1 = harm_oscil_nd # code name
 
 F90 = gfortran
 

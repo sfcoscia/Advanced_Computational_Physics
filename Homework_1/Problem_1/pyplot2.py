@@ -6,13 +6,15 @@ data = np.loadtxt('./fort.7')
 
 # Separate x and y values
 x = data[:, 0]
-y1 = data[:, 1]
-y2 = data[:, 2]
-y3 = data[:, 3]
-y4 = data[:, 4]
+y0 = data[:, 1]
+y1 = data[:, 2]
+y2 = data[:, 3]
+y3 = data[:, 4]
+y4 = data[:, 5]
 y5 = data[:, 5]
 #print(x, y)
 # Create the plot
+plt.plot(x, y0, linestyle='-', label = "n=0")
 plt.plot(x, y1, linestyle='-', label = "n=1")
 plt.plot(x, y2, linestyle='-', label = "n=2")
 plt.plot(x, y3, linestyle='-', label = "n=3")
@@ -22,5 +24,7 @@ plt.legend()
 plt.xlabel('x')
 plt.ylabel(r'$\psi(x)$')
 plt.title(r'Wavefunctions for 1D Harmonic Oscillator')
+plt.savefig('1d_harm_oscil.png')
 plt.grid(True)
 plt.show()
+
