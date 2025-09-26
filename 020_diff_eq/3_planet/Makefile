@@ -1,5 +1,5 @@
 
-OBJS1 = numtype.o planet.o# object files
+OBJS1 = numtype.o planet.o # object files
 
 PROG1 = planet # code name
 
